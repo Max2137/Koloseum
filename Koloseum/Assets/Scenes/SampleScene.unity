@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 420665201}
   - component: {fileID: 420665205}
   - component: {fileID: 420665204}
+  - component: {fileID: 420665206}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -242,6 +243,21 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &420665206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420665199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e375614582dfcc439a6e3fb40fd044a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveDirection: {x: 0, y: 0, z: 0}
+  dashDistance: 10
+  dashStoppingSpeed: 0.1
 --- !u!1 &449489868
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,6 +657,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 28be426a8f077f8409d373ab2841d19f, type: 3}
@@ -736,6 +753,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 28be426a8f077f8409d373ab2841d19f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 449489869}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 28be426a8f077f8409d373ab2841d19f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 834767727}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 28be426a8f077f8409d373ab2841d19f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1243129253}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 28be426a8f077f8409d373ab2841d19f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1403655098}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 28be426a8f077f8409d373ab2841d19f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1516660772}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 28be426a8f077f8409d373ab2841d19f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1871941224}
   m_SourcePrefab: {fileID: 100100000, guid: 28be426a8f077f8409d373ab2841d19f, type: 3}
 --- !u!1 &1243129252
 GameObject:
