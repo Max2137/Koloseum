@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 420665210}
   m_Layer: 0
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1135,6 +1135,7 @@ GameObject:
   - component: {fileID: 1455789564}
   - component: {fileID: 1455789563}
   - component: {fileID: 1455789562}
+  - component: {fileID: 1455789568}
   - component: {fileID: 1455789561}
   - component: {fileID: 1455789567}
   - component: {fileID: 1455789560}
@@ -1252,10 +1253,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 4.29
-  m_Acceleration: 8
+  m_Speed: 10
+  m_Acceleration: 10
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 10
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -1291,6 +1292,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
+--- !u!114 &1455789568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455789559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1d01be92b83124f968bc47b8c1fe01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
+  pushForce: 10
+  cooldown: 1
 --- !u!1 &1516660771
 GameObject:
   m_ObjectHideFlags: 0
