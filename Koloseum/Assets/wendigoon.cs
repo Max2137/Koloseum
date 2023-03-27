@@ -30,6 +30,8 @@ public class wendigoon : MonoBehaviour
 
     public float stunningDuration = 2f;
 
+    public bool canStop = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -84,7 +86,11 @@ public class wendigoon : MonoBehaviour
         {
             rb.velocity = Vector3.zero;
 
-            Invoke("stunningStop", stunningDuration);
+            if(canStop == true)
+            {
+                Invoke("stunningStop", stunningDuration);
+                canStop = false;
+            }
         }
     }
     
@@ -93,23 +99,33 @@ public class wendigoon : MonoBehaviour
         rb.velocity = Vector3.zero;
 
         isFollowing = true;
+
+        if (isStunned == true)
+        {
+            isFollowing = false;
+        }
     }
 
     void stunningStop()
     {
         isStunned = false;
 
-        isFollowing = true;
-
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        canStop = true;
 
         if (distanceToPlayer < dashDistance)
         {
+            isFollowing = true;
+            isFollowing = false;
+
             preparingCooldown = 5;
+            isPreparing = true;
         }
 
         if (distanceToPlayer >= dashDistance)
         {
+            isFollowing = true;
             preparingCooldown = 60;
         }
     }
