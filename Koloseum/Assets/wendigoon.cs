@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
 public class wendigoon : MonoBehaviour
 {
     public int HP = 5;
@@ -11,18 +10,21 @@ public class wendigoon : MonoBehaviour
 
     public float speed = 5;
 
-    private bool isFollowing = true;
-    private bool isPreparing = false;
-    private bool isCharging = false;
-    private bool isAstuned = false;
+    public bool isFollowing = true;
+    public bool isPreparing = false;
+    public bool isCharging = false;
+    public bool isAstuned = false;
 
-    public Transform PlayerTarget;
-    
+    public Transform player;
+
+    public float dashDistance = 5;
+
+    public float preparingCooldown = 60;
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayerTarget = GameObject.Find("Player").transform;
+
     }
 
     // Update is called once per frame
@@ -30,8 +32,41 @@ public class wendigoon : MonoBehaviour
     {
         if (isFollowing == true)
         {
-            Transorm.LookAt(PlayerTarget);
-            Transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            transform.LookAt(player);
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        }
+
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        if (distanceToPlayer < dashDistance && isFollowing == true)
+        {
+            isPreparing = true;
+
+            isFollowing = false;
+        }
+
+        if (isPreparing == true)
+        {
+            preparingCooldown -= 1;
+        }
+
+        if (preparingCooldown < 0)
+        {
+            isCharging = true;
+
+            isPreparing = false;
+
+            preparingCooldown = 60;
+        }
+
+        if (isCharging == true)
+        {
+            Vector3 dashDirection = (player.position - transform.position).normalized;
+            transform.Translate(dashDirection * 5 * Time.deltaTime, Space.World);
+
+            Debug.Log("Charging");
+
+            isCharging = false;
         }
     }
 }
