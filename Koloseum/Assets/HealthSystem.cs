@@ -5,6 +5,8 @@ public class HealthSystem : MonoBehaviour
     public int health;
     public int maxHealth;
 
+    public ProgressBarController progressBarController;
+
     void Start()
     {
         health = maxHealth;
@@ -17,6 +19,14 @@ public class HealthSystem : MonoBehaviour
         if (health <= 0)
         {
             Die();
+        }
+        else if ((float)health / maxHealth <= 0.2f)
+        {
+            progressBarController.OnPositiveAction();
+        }
+        else if ((float)health / maxHealth <= 0.15f)
+        {
+            progressBarController.OnNegativeAction();
         }
     }
 
