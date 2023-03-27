@@ -717,11 +717,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 585936670164929886, guid: e0584d20663474748914b3176697e65c, type: 3}
       propertyPath: health
-      value: 200
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 585936670164929886, guid: e0584d20663474748914b3176697e65c, type: 3}
       propertyPath: maxHealth
-      value: 200
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 585936670164929887, guid: e0584d20663474748914b3176697e65c, type: 3}
       propertyPath: PlayerTarget
