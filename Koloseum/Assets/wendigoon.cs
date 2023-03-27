@@ -15,7 +15,7 @@ public class wendigoon : MonoBehaviour
     public bool isFollowing = true;
     public bool isPreparing = false;
     public bool isCharging = false;
-    public bool isAstuned = false;
+    public bool isStunned = false;
 
     public Transform player;
 
@@ -28,38 +28,41 @@ public class wendigoon : MonoBehaviour
 
     public float pushbackForce = 30f;
 
-    // Start is called before the first frame update
+    public float stunningDuration = 2f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.position = new Vector3(transform.position.x, fixedYValue, transform.position.z);
 
-        if (isFollowing == true)
+        if (isFollowing == true && isStunned == false)
         {
             transform.LookAt(player);
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
+            isCharging = false;
+            isPreparing = false;
         }
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (distanceToPlayer < dashDistance && isFollowing == true)
+        if (distanceToPlayer < dashDistance && isFollowing == true && isStunned == false)
         {
             isPreparing = true;
 
             isFollowing = false;
         }
 
-        if (isPreparing == true)
+        if (isPreparing == true && isStunned == false)
         {
             preparingCooldown -= 1;
         }
 
-        if (preparingCooldown < 0)
+        if (preparingCooldown < 0 && isStunned == false)
         {
             isPreparing = false;
 
@@ -68,13 +71,20 @@ public class wendigoon : MonoBehaviour
             preparingCooldown = 60;
         }
 
-        if (isCharging == true)
+        if (isCharging == true && isStunned == false)
         {
             rb.AddForce(transform.forward * dashForce, ForceMode.Impulse);
 
             isCharging = false;
 
             Invoke("chargeStop", dashDuration);
+        }
+
+        if (isStunned == true)
+        {
+            rb.velocity = Vector3.zero;
+
+            Invoke("stunningStop", stunningDuration);
         }
     }
     
@@ -83,8 +93,25 @@ public class wendigoon : MonoBehaviour
         rb.velocity = Vector3.zero;
 
         isFollowing = true;
+    }
 
-        Debug.Log("chargeStop");
+    void stunningStop()
+    {
+        isStunned = false;
+
+        isFollowing = true;
+
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        if (distanceToPlayer < dashDistance)
+        {
+            preparingCooldown = 5;
+        }
+
+        if (distanceToPlayer >= dashDistance)
+        {
+            preparingCooldown = 60;
+        }
     }
 
     private void OnCollisionEnter(Collision other)
@@ -102,5 +129,12 @@ public class wendigoon : MonoBehaviour
                 otherRigidbody.AddForce(pushbackDirection * pushbackForce, ForceMode.Impulse);
             }
         }
-   }
+        
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            isStunned = true;
+
+            isFollowing = false;
+        }
+    }
 }
