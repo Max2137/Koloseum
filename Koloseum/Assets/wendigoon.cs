@@ -30,7 +30,14 @@ public class wendigoon : MonoBehaviour
 
     public float stunningDuration = 2f;
 
-    public bool canStop = true;
+    public bool touchingWall = false;
+
+    public int damage = 40;
+    public bool touchingPlayer = false;
+
+    public bool chargingOngoing = false;
+
+    private PlayerHealth playerHealth;
 
     void Start()
     {
@@ -45,26 +52,23 @@ public class wendigoon : MonoBehaviour
         {
             transform.LookAt(player);
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
-
-            isCharging = false;
-            isPreparing = false;
         }
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (distanceToPlayer < dashDistance && isFollowing == true && isStunned == false)
+        if (distanceToPlayer < dashDistance && isFollowing == true)
         {
             isPreparing = true;
 
             isFollowing = false;
         }
 
-        if (isPreparing == true && isStunned == false)
+        if (isPreparing == true)
         {
             preparingCooldown -= 1;
         }
 
-        if (preparingCooldown < 0 && isStunned == false)
+        if (preparingCooldown < 0)
         {
             isPreparing = false;
 
@@ -73,11 +77,13 @@ public class wendigoon : MonoBehaviour
             preparingCooldown = 60;
         }
 
-        if (isCharging == true && isStunned == false)
+        if (isCharging == true)
         {
             rb.AddForce(transform.forward * dashForce, ForceMode.Impulse);
 
             isCharging = false;
+
+            chargingOngoing = true;
 
             Invoke("chargeStop", dashDuration);
         }
@@ -85,54 +91,56 @@ public class wendigoon : MonoBehaviour
         if (isStunned == true)
         {
             rb.velocity = Vector3.zero;
+        }
 
-            if(canStop == true)
-            {
-                Invoke("stunningStop", stunningDuration);
-                canStop = false;
-            }
+        if (touchingPlayer == true && chargingOngoing == true)
+        {
+            Debug.Log("-40hp");
+            touchingPlayer = false;
+            chargingOngoing = false;
         }
     }
-    
+
     void chargeStop()
     {
         rb.velocity = Vector3.zero;
 
-        isFollowing = true;
+        chargingOngoing = false;
 
-        if (isStunned == true)
+        if (touchingWall == true)
         {
-            isFollowing = false;
+            isStunned = true;
+            chargingOngoing = false;
+            Invoke("stunningStop", stunningDuration);
+        }
+        else
+        {
+            isFollowing = true;
         }
     }
 
     void stunningStop()
     {
         isStunned = false;
+        touchingWall = false;
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        canStop = true;
-
         if (distanceToPlayer < dashDistance)
         {
-            isFollowing = true;
-            isFollowing = false;
-
-            preparingCooldown = 5;
-            isPreparing = true;
+            transform.LookAt(player);
+            preparingCooldown = 30;
+            isPreparing= true;
         }
-
-        if (distanceToPlayer >= dashDistance)
+        else
         {
             isFollowing = true;
-            preparingCooldown = 60;
         }
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Player")) // Check if the other object is the player
+        if (other.gameObject.CompareTag("Player") && isStunned == false) // Check if the other object is the player
         {
             Rigidbody otherRigidbody = other.gameObject.GetComponent<Rigidbody>();
             if (otherRigidbody != null) // Check if the player has a rigidbody component
@@ -144,13 +152,12 @@ public class wendigoon : MonoBehaviour
                 // Apply the pushback force to the player
                 otherRigidbody.AddForce(pushbackDirection * pushbackForce, ForceMode.Impulse);
             }
+
+            touchingPlayer = true;
         }
-        
         if (other.gameObject.CompareTag("Wall"))
         {
-            isStunned = true;
-
-            isFollowing = false;
+            touchingWall = true;
         }
     }
 }

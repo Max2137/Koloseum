@@ -27,6 +27,11 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
+
+        //if (rb.velocity.magnitude > 0.1f)
+        //{
+        //    transform.LookAt(transform.position + rb.velocity);
+        //}
     }
 
     IEnumerator Dash()
