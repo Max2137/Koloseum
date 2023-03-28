@@ -91,6 +91,15 @@ public class wendigoon : MonoBehaviour
         if (isStunned == true)
         {
             rb.velocity = Vector3.zero;
+
+            // Get the original rotation of the transform
+            Quaternion originalRotation = transform.rotation;
+
+            // Create a new Vector3 with the y-axis rotation of the original transform and zero values for x and z
+            Vector3 newRotation = new Vector3(0f, originalRotation.eulerAngles.y, 0f);
+
+            // Set the rotation of the transform to the new Vector3
+            transform.rotation = Quaternion.Euler(newRotation);
         }
 
         if (touchingPlayer == true && chargingOngoing == true)
