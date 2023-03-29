@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public int hp;
     public int maxHp;
+    public ProgressBarController progressBarController;
 
     // Start is called before the first frame update
     void Start()
@@ -30,5 +31,6 @@ public class PlayerHealth : MonoBehaviour
     public void WendigoonCharge()
     {
         hp -= 40;
+        progressBarController.OnNegativeAction();
     }
 }
