@@ -1,47 +1,57 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public int attackDamage = 10;
-    public string enemyTag = "Enemy";
-    public float comboDamageMultiplier = 2f;
-    public float comboCooldown = 5f;
+    public wendigoon wendigoon;
 
-    private float lastComboTime = -Mathf.Infinity;
+    public int cooldownAttackQuick;
 
+    public bool isColliding = false;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
     void Update()
     {
-        // Check if left shift and right mouse button are pressed.
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButtonDown(1))
+        if (wendigoon != null)
         {
-            // Check if the combo is off cooldown.
-            if (Time.time >= lastComboTime + comboCooldown)
+
+            cooldownAttackQuick -= 1;
+
+            if (isColliding == true)
             {
-                // Deal combo damage to enemies within a certain radius.
-                Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f);
-                foreach (Collider collider in hitColliders)
+                if (Input.GetMouseButtonDown(0))
                 {
-                    if (collider.gameObject.CompareTag(enemyTag))
+                    if (cooldownAttackQuick <= 0)
                     {
-                        HealthSystem healthSystem = collider.gameObject.GetComponent<HealthSystem>();
-                        healthSystem.TakeDamage((int)(attackDamage * comboDamageMultiplier));
+                        wendigoon.QickAttacked();
+                        //Debug.Log("Atakuje");
+
+                        cooldownAttackQuick = 60;
                     }
                 }
-
-                // Start the combo cooldown.
-                lastComboTime = Time.time;
             }
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision other)
     {
-        // Check if the collision object has the enemy tag.
-        if (collision.gameObject.CompareTag(enemyTag))
+        if (other.gameObject.CompareTag("Wendigoon"))
         {
-            // Deal normal damage to enemies.
-            HealthSystem healthSystem = collision.gameObject.GetComponent<HealthSystem>();
-            healthSystem.TakeDamage(attackDamage);
+            isColliding = true;
+        }
+    }
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("Wendigoon"))
+        {
+            isColliding = false;
         }
     }
 }

@@ -1,60 +1,85 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float dashSpeed = 10f;
+    public float turnSpeed = 10f;
+    public float dashDistance = 5f;
     public float dashDuration = 0.2f;
     public float dashCooldown = 1f;
-    private Rigidbody rb;
-    private Vector3 movement;
-    private bool canDash = true;
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] private Vector3 movement;
+    [SerializeField] private bool canDash = true;
+    [SerializeField] private bool isFlying = true;
+
+    public wendigoon wendigoon;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        transform.Rotate(new Vector3(0f, -90f, 0f));
     }
 
     void FixedUpdate()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        movement = new Vector3(horizontal, 0f, vertical).normalized;
+        if (isFlying == false) 
+        {
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
 
+            movement = new Vector3(horizontal, 0f, vertical).normalized;
+            Vector3 lookDirection = movement.magnitude > 0f ? movement : transform.forward;
+
+            Quaternion lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
+            Quaternion newRotation = Quaternion.Lerp(rb.rotation, lookRotation, turnSpeed * Time.fixedDeltaTime);
+            rb.MoveRotation(newRotation);
+
+            rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        }
+    }
+
+    void Update()
+    {
         if (canDash && Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(Dash());
         }
-
-        //if (rb.velocity.magnitude > 0.1f)
-        //{
-        //    transform.LookAt(transform.position + rb.velocity);
-        //}
     }
 
     IEnumerator Dash()
     {
         canDash = false;
         Vector3 dashDirection = movement.magnitude > 0f ? movement.normalized : transform.forward;
-        rb.velocity = dashDirection * dashSpeed;
-        yield return new WaitForSeconds(dashDuration);
-        rb.velocity = Vector3.zero;
+        float dashDistanceRemaining = dashDistance;
+        float dashTimer = 0f;
+
+        while (dashDistanceRemaining > 0f && dashTimer < dashDuration)
+        {
+            float dashDistanceThisFrame = Mathf.Min(dashDistanceRemaining, Time.deltaTime * dashDistance / dashDuration);
+            rb.MovePosition(rb.position + dashDirection * dashDistanceThisFrame);
+            dashDistanceRemaining -= dashDistanceThisFrame;
+            dashTimer += Time.deltaTime;
+            yield return null;
+        }
+
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
-
-    void OnCollisionEnter(Collision collision)
+    public void forceStop()
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            rb.velocity = Vector3.zero;
-        }
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
-
-    void LateUpdate()
+    
+    private void OnCollisionEnter(Collision other)
     {
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            //Debug.Log("Touched grass");
+            isFlying = false;
+            wendigoon.StartMove();
+        }
     }
 }

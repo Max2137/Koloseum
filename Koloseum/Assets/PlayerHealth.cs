@@ -1,65 +1,34 @@
-using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public class playerHealth : MonoBehaviour
 {
-    public int health;
-    public int maxHealth;
-    public float increaseDelay = 5f; // Delay in seconds for the progress bar increase
+    public int hp;
+    public int maxHp;
 
-    public ProgressBarController progressBarController;
-
-    private Coroutine progressBarCoroutine; // Store reference to the progress bar coroutine
-
+    // Start is called before the first frame update
     void Start()
     {
-        health = maxHealth;
+        hp = maxHp;
     }
 
-    public void TakeDamage(int attackDamage)
+    // Update is called once per frame
+    void Update()
     {
-        health -= attackDamage;
-
-        if (health <= 0)
+        if (hp <= 0)
         {
-            Die();
-        }
-        else if ((float)health / maxHealth <= 0.2f)
-        {
-            // If the progress bar coroutine is not running, start it
-            if (progressBarCoroutine == null)
-            {
-                progressBarCoroutine = StartCoroutine(IncreaseProgressBar());
-            }
-        }
-        else if ((float)health / maxHealth <= 0.15f)
-        {
-            progressBarController.OnNegativeAction();
-        }
-        else
-        {
-            // If the progress bar coroutine is running, stop it
-            if (progressBarCoroutine != null)
-            {
-                StopCoroutine(progressBarCoroutine);
-                progressBarCoroutine = null;
-            }
-            progressBarController.OnPositiveAction();
+            playerDeath();
         }
     }
 
-    private IEnumerator IncreaseProgressBar()
-    {
-        while ((float)health / maxHealth <= 0.2f)
-        {
-            progressBarController.OnPositiveAction();
-            yield return new WaitForSeconds(increaseDelay);
-        }
-        progressBarCoroutine = null;
-    }
-
-    private void Die()
+    public void playerDeath()
     {
         Destroy(gameObject);
+    }
+    
+    public void WendigoonCharge()
+    {
+        hp -= 40;
     }
 }

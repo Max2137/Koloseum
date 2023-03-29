@@ -7,8 +7,8 @@ public class wendigoon : MonoBehaviour
 {
     public float fixedYValue = 1.73f;
 
-    public int HP = 5;
-    public int maxHP = 5;
+    public int HP = 100;
+    public int maxHP = 100;
 
     public float speed = 5;
 
@@ -37,76 +37,100 @@ public class wendigoon : MonoBehaviour
 
     public bool chargingOngoing = false;
 
-    private PlayerHealth playerHealth;
+    public bool canPush = true;
+
+    public PlayerMovement playerMovement;
+
+    public playerHealth playerHealth;
+
+    public bool canMove = false;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
+
+        transform.Rotate(new Vector3(0f, 180f, 0f));
     }
 
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, fixedYValue, transform.position.z);
-
-        if (isFollowing == true && isStunned == false)
+        if (player != null && canMove == true)
         {
-            transform.LookAt(player);
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
-        }
 
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+            transform.position = new Vector3(transform.position.x, fixedYValue, transform.position.z);
 
-        if (distanceToPlayer < dashDistance && isFollowing == true)
-        {
-            isPreparing = true;
+            if (isFollowing == true && isStunned == false)
+            {
+                transform.LookAt(player);
+                transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            }
 
-            isFollowing = false;
-        }
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (isPreparing == true)
-        {
-            preparingCooldown -= 1;
-        }
+            if (distanceToPlayer < dashDistance && isFollowing == true)
+            {
+                isPreparing = true;
 
-        if (preparingCooldown < 0)
-        {
-            isPreparing = false;
+                isFollowing = false;
+            }
 
-            isCharging = true;
+            if (isPreparing == true)
+            {
+                preparingCooldown -= 1;
+            }
 
-            preparingCooldown = 60;
-        }
+            if (preparingCooldown < 0)
+            {
+                isPreparing = false;
 
-        if (isCharging == true)
-        {
-            rb.AddForce(transform.forward * dashForce, ForceMode.Impulse);
+                isCharging = true;
 
-            isCharging = false;
+                preparingCooldown = 60;
+            }
 
-            chargingOngoing = true;
+            if (isCharging == true)
+            {
+                canPush = true;
 
-            Invoke("chargeStop", dashDuration);
-        }
+                rb.AddForce(transform.forward * dashForce, ForceMode.Impulse);
 
-        if (isStunned == true)
-        {
-            rb.velocity = Vector3.zero;
+                isCharging = false;
 
-            // Get the original rotation of the transform
-            Quaternion originalRotation = transform.rotation;
+                chargingOngoing = true;
 
-            // Create a new Vector3 with the y-axis rotation of the original transform and zero values for x and z
-            Vector3 newRotation = new Vector3(0f, originalRotation.eulerAngles.y, 0f);
+                Invoke("chargeStop", dashDuration);
+            }
 
-            // Set the rotation of the transform to the new Vector3
-            transform.rotation = Quaternion.Euler(newRotation);
-        }
+            if (isStunned == true)
+            {
+                GetComponent<Rigidbody>().isKinematic = true;
 
-        if (touchingPlayer == true && chargingOngoing == true)
-        {
-            Debug.Log("-40hp");
-            touchingPlayer = false;
-            chargingOngoing = false;
+                rb.velocity = Vector3.zero;
+
+                // Get the original rotation of the transform
+                Quaternion originalRotation = transform.rotation;
+
+                // Create a new Vector3 with the y-axis rotation of the original transform and zero values for x and z
+                Vector3 newRotation = new Vector3(0f, originalRotation.eulerAngles.y, 0f);
+
+                // Set the rotation of the transform to the new Vector3
+                transform.rotation = Quaternion.Euler(newRotation);
+            }
+
+            if (touchingPlayer == true && chargingOngoing == true)
+            {
+                playerHealth.WendigoonCharge();
+
+                touchingPlayer = false;
+                chargingOngoing = false;
+            }
+
+            if (HP <= 0)
+            {
+                Death();
+            }
         }
     }
 
@@ -135,6 +159,8 @@ public class wendigoon : MonoBehaviour
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
+        GetComponent<Rigidbody>().isKinematic = false;
+
         if (distanceToPlayer < dashDistance)
         {
             transform.LookAt(player);
@@ -149,7 +175,7 @@ public class wendigoon : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Player") && isStunned == false) // Check if the other object is the player
+        if (other.gameObject.CompareTag("Player") && isStunned == false && canPush == true) // Check if the other object is the player
         {
             Rigidbody otherRigidbody = other.gameObject.GetComponent<Rigidbody>();
             if (otherRigidbody != null) // Check if the player has a rigidbody component
@@ -160,13 +186,36 @@ public class wendigoon : MonoBehaviour
 
                 // Apply the pushback force to the player
                 otherRigidbody.AddForce(pushbackDirection * pushbackForce, ForceMode.Impulse);
+
+
+                //Instiante();
+                playerMovement.forceStop();
             }
 
             touchingPlayer = true;
+            canPush = false;
         }
         if (other.gameObject.CompareTag("Wall"))
         {
             touchingWall = true;
         }
+    }
+
+    public void QickAttacked()
+    {
+        if (isStunned == true)
+        {
+            HP -= 40;
+        }
+    }
+
+    public void Death()
+    {
+        Destroy(gameObject);
+    }
+
+    public void StartMove()
+    {
+        canMove = true;
     }
 }

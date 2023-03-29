@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 5530103178751554931}
   - component: {fileID: 5530103178751554943}
   - component: {fileID: 5530103178751554941}
-  - component: {fileID: 5530103178751554928}
+  - component: {fileID: 2250532846789424190}
+  - component: {fileID: 1041993614}
+  - component: {fileID: 1041993615}
   m_Layer: 0
   m_Name: player
   m_TagString: Player
@@ -44,7 +46,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5530103178751554917}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -91,10 +93,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f3d69e3cb7bb4e4b97d4eff5e27b23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
-  dashSpeed: 10
-  dashDuration: 0.25
-  dashCooldown: 0
+  moveSpeed: 10
+  turnSpeed: 10
+  dashDistance: 10
+  dashDuration: 0.2
+  dashCooldown: 0.75
+  rb: {fileID: 5530103178751554941}
+  movement: {x: 0, y: 0, z: 0}
+  canDash: 1
+  isFlying: 1
 --- !u!143 &5530103178751554943
 CharacterController:
   m_ObjectHideFlags: 0
@@ -129,7 +136,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!65 &5530103178751554928
+--- !u!65 &2250532846789424190
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,8 +147,37 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.6602193, y: 2, z: 1.7061107}
-  m_Center: {x: -0.013770282, y: 0, z: 0.09385824}
+  m_Size: {x: 1, y: 1.9492825, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1041993614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5530103178751554917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4420a58110cc905408d35267eef670e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 0
+  maxHp: 100
+--- !u!114 &1041993615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5530103178751554917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de4692fe9e9cea441ada531a58516ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wendigoon: {fileID: 0}
+  cooldownAttackQuick: 0
+  isColliding: 0
 --- !u!1001 &3197036607689690992
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -192,6 +228,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e7184334304c3b4c92fe252c1573e4b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8e7184334304c3b4c92fe252c1573e4b, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8e7184334304c3b4c92fe252c1573e4b, type: 3}
