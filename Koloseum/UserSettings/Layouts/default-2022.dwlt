@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1280
     height: 637
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -406,9 +406,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: c25e0000
       m_LastClickedID: 0
-      m_ExpandedIDs: a4faffff1afbffff
+      m_ExpandedIDs: 66f4ffff80f5ffff1afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -690,9 +690,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -1569.1031, y: -143.79514, z: 1599.2876}
+    m_Target: {x: -1772.6073, y: -1272.7983, z: 235.13783}
     speed: 2
-    m_Value: {x: -1569.1031, y: -143.79514, z: 1599.2876}
+    m_Value: {x: -1772.6073, y: -1272.7983, z: 235.13783}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -738,9 +738,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.0363984, y: -0.3768478, z: 0.014828136, w: 0.92548496}
+    m_Target: {x: 0.23105936, y: -0.6272876, z: 0.20255347, w: 0.7156672}
     speed: 2
-    m_Value: {x: 0.03639692, y: -0.3768325, z: 0.014827534, w: 0.92544734}
+    m_Value: {x: 0.23104946, y: -0.6272608, z: 0.2025448, w: 0.71563655}
   m_Size:
     m_Target: 1129.0718
     speed: 2
@@ -810,21 +810,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Franek\Desktop\PROJECT COLOSEUM\GRA\Koloseum\Koloseum
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: f25b0000
-    m_LastClickedID: 23538
+    scrollPos: {x: 0, y: 7}
+    m_SelectedIDs: 025c0000
+    m_LastClickedID: 23554
     m_ExpandedIDs: 00000000f25b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -880,7 +880,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -905,7 +905,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 182}
+    m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 64
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 207
@@ -972,7 +972,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 378
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
