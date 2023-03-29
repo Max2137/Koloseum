@@ -7,7 +7,7 @@ public class PlayerHealth : MonoBehaviour
     public int hp;
     public int maxHp;
     public ProgressBarController progressBarController;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -32,5 +32,6 @@ public class PlayerHealth : MonoBehaviour
     {
         hp -= 40;
         progressBarController.OnNegativeAction();
+       
     }
 }
