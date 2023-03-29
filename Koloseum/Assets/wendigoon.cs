@@ -41,7 +41,7 @@ public class wendigoon : MonoBehaviour
 
     public PlayerMovement playerMovement;
 
-    public playerHealth playerHealth;
+    public PlayerHealth playerHealth;
 
     public bool canMove = false;
 

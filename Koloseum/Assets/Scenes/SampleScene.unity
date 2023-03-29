@@ -279,6 +279,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 35588be056b57f44f9d530ca15245b72, type: 3}
   m_PrefabInstance: {fileID: 1140525770}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &665657494 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5530103178751554917, guid: cf7ea173e2bc87e41a228999ef50cdc2, type: 3}
+  m_PrefabInstance: {fileID: 5530103178632913418}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,23 +756,26 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5530103178751554931, guid: cf7ea173e2bc87e41a228999ef50cdc2, type: 3}
   m_PrefabInstance: {fileID: 5530103178632913418}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 665657494}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f3d69e3cb7bb4e4b97d4eff5e27b23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1041993614 stripped
+--- !u!114 &1041993620
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1041993614, guid: cf7ea173e2bc87e41a228999ef50cdc2, type: 3}
-  m_PrefabInstance: {fileID: 5530103178632913418}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 665657494}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4420a58110cc905408d35267eef670e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 100
+  maxHp: 100
 --- !u!4 &1060811651 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ef8cfd841c9a1b34f9941717b2c47041, type: 3}
@@ -1715,7 +1723,7 @@ MonoBehaviour:
   chargingOngoing: 0
   canPush: 1
   playerMovement: {fileID: 1041993612}
-  playerHealth: {fileID: 1041993614}
+  playerHealth: {fileID: 1041993620}
   canMove: 0
 --- !u!135 &1788483460
 SphereCollider:
@@ -2041,7 +2049,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1041993614, guid: cf7ea173e2bc87e41a228999ef50cdc2, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5530103178751554937, guid: cf7ea173e2bc87e41a228999ef50cdc2, type: 3}
       insertIndex: -1
