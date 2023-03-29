@@ -1716,6 +1716,7 @@ MonoBehaviour:
   canPush: 1
   playerMovement: {fileID: 1041993612}
   playerHealth: {fileID: 1041993614}
+  canMove: 0
 --- !u!135 &1788483460
 SphereCollider:
   m_ObjectHideFlags: 0
