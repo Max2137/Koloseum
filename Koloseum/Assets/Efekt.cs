@@ -13,6 +13,8 @@ public class Efekt : MonoBehaviour
     public float maxefect;
 
     public float constantDecrease;
+    public float increase;
+    public float decrease;
     
     void Start()
     {
@@ -26,5 +28,8 @@ public class Efekt : MonoBehaviour
         barefect.fillAmount = barLevel;
 
         effect -= constantDecrease;
+
+        effect -= decrease;
+        effect += increase;
     }
 }
