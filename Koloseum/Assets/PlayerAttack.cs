@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.UI;
+
 public class PlayerAttack : MonoBehaviour
 {
     public wendigoon wendigoon;
 
-    public int cooldownAttackQuick;
+    public float cooldownAttackQuick;
 
     public bool isColliding = false;
+
+    public Image barImage3;
+    public float barLevel;
 
     // Start is called before the first frame update
     void Start()
@@ -19,9 +24,12 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        barLevel = 1 -(cooldownAttackQuick / 60);
+        barImage3.fillAmount = barLevel;
+
         if (wendigoon != null)
         {
-
+            if (cooldownAttackQuick > 0)
             cooldownAttackQuick -= 1;
 
             if (isColliding == true)
