@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int hp;
-    public int maxHp;
-    public ProgressBarController progressBarController;
-    
-    
+    public float hp;
+    public float maxHp;
+    public Image barImage;
+    public float barLevel;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,10 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        barLevel = hp / maxHp;
+        barImage.fillAmount = barLevel;
+            
+
         if (hp <= 0)
         {
             playerDeath();
@@ -32,8 +38,5 @@ public class PlayerHealth : MonoBehaviour
     public void WendigoonCharge()
     {
         hp -= 40;
-        progressBarController.OnNegativeAction();
-        
-       
     }
 }

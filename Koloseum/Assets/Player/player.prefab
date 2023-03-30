@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5530103178751554943}
   - component: {fileID: 5530103178751554941}
   - component: {fileID: 2250532846789424190}
-  - component: {fileID: 1041993614}
   - component: {fileID: 1041993615}
   m_Layer: 0
   m_Name: player
@@ -102,6 +101,7 @@ MonoBehaviour:
   movement: {x: 0, y: 0, z: 0}
   canDash: 1
   isFlying: 1
+  wendigoon: {fileID: 0}
 --- !u!143 &5530103178751554943
 CharacterController:
   m_ObjectHideFlags: 0
@@ -149,20 +149,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.9492825, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1041993614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5530103178751554917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4420a58110cc905408d35267eef670e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 0
-  maxHp: 100
 --- !u!114 &1041993615
 MonoBehaviour:
   m_ObjectHideFlags: 0

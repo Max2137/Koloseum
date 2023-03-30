@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class wendigoon : MonoBehaviour
 {
     public float fixedYValue = 1.73f;
 
-    public int HP = 100;
-    public int maxHP = 100;
+    public float HP = 100;
+    public float maxHP = 100;
 
     public float speed = 5;
 
@@ -45,6 +45,9 @@ public class wendigoon : MonoBehaviour
 
     public bool canMove = false;
 
+    public Image barImage2;
+    public float barLevel;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -56,6 +59,9 @@ public class wendigoon : MonoBehaviour
 
     void Update()
     {
+        barLevel = HP / maxHP;
+        barImage2.fillAmount = barLevel;
+
         if (player != null && canMove == true)
         {
 
