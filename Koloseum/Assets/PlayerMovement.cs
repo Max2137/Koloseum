@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (canDash && Input.GetKeyDown(KeyCode.Space))
+        if (canDash && Input.GetKeyDown(KeyCode.Space) && isFlying == false)
         {
             StartCoroutine(Dash());
         }
