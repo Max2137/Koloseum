@@ -867,7 +867,7 @@ MonoBehaviour:
   isWorking: 0
   barefect: {fileID: 169859191}
   barLevel: 0
-  effect: 25
+  effect: 35
   maxefect: 100
   constantDecrease: 0
   constantDecreaseStart: 0.005
