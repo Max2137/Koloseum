@@ -12,8 +12,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector3 movement;
     [SerializeField] private bool canDash = true;
     [SerializeField] private bool isFlying = true;
+    public bool touchingWall = false;
 
     public wendigoon wendigoon;
+    public Efekt efekt;
 
     void Start()
     {
@@ -55,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         float dashDistanceRemaining = dashDistance;
         float dashTimer = 0f;
 
-        while (dashDistanceRemaining > 0f && dashTimer < dashDuration)
+        while (dashDistanceRemaining > 0f && dashTimer < dashDuration && touchingWall == false)
         {
             float dashDistanceThisFrame = Mathf.Min(dashDistanceRemaining, Time.deltaTime * dashDistance / dashDuration);
             rb.MovePosition(rb.position + dashDirection * dashDistanceThisFrame);
@@ -80,6 +82,21 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log("Touched grass");
             isFlying = false;
             wendigoon.StartMove();
+            efekt.start();
+        }
+
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            touchingWall = true;
+            //Debug.Log("Touched wall");
+        }
+    }
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            touchingWall = false;
+            //Debug.Log("Stop touched wall");
         }
     }
 }

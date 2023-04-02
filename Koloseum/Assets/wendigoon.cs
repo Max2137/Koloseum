@@ -48,6 +48,8 @@ public class wendigoon : MonoBehaviour
     public Image barImage2;
     public float barLevel;
 
+    public Efekt efekt;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -193,8 +195,6 @@ public class wendigoon : MonoBehaviour
                 // Apply the pushback force to the player
                 otherRigidbody.AddForce(pushbackDirection * pushbackForce, ForceMode.Impulse);
 
-
-                //Instiante();
                 playerMovement.forceStop();
             }
 
@@ -212,11 +212,14 @@ public class wendigoon : MonoBehaviour
         if (isStunned == true)
         {
             HP -= 40;
+            
         }
     }
 
     public void Death()
     {
+        efekt.End();
+        efekt.Kill();
         Destroy(gameObject);
     }
 

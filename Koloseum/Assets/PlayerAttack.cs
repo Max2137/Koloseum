@@ -15,10 +15,15 @@ public class PlayerAttack : MonoBehaviour
     public Image barImage3;
     public float barLevel;
 
+    public Efekt efekt;
+
+    public float effect1;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -42,11 +47,18 @@ public class PlayerAttack : MonoBehaviour
                         //Debug.Log("Atakuje");
 
                         cooldownAttackQuick = 60;
+
+                        effect1 = efekt.effect;
+                        effect1 += 15;
+                        efekt.effect = effect1;
+
+                        efekt.DecreaseSpeedReset();
                     }
                 }
             }
         }
     }
+
 
     private void OnCollisionEnter(Collision other)
     {
