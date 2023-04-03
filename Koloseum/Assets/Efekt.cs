@@ -60,7 +60,7 @@ public class Efekt : MonoBehaviour
             distance = Vector3.Distance(wendigoonTransform.position, playerTransform.position);
 
             effect = effect - constantDecrease;
-            constantDecrease = (float)(constantDecrease * 1.0025);
+            constantDecrease = (float)(constantDecrease * 1.001);
 
             if (distance > 13)
             {

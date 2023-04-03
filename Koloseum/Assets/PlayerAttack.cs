@@ -34,7 +34,6 @@ public class PlayerAttack : MonoBehaviour
 
         if (wendigoon != null)
         {
-            if (cooldownAttackQuick > 0)
             cooldownAttackQuick -= 1;
 
             if (isColliding == true)
@@ -46,7 +45,7 @@ public class PlayerAttack : MonoBehaviour
                         wendigoon.QickAttacked();
                         //Debug.Log("Atakuje");
 
-                        cooldownAttackQuick = 60;
+                        cooldownAttackQuick = 250;
 
                         effect1 = efekt.effect;
                         effect1 += 15;
@@ -59,17 +58,16 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Wendigoon"))
+        if (other.CompareTag("Wendigoon"))
         {
             isColliding = true;
         }
     }
-    private void OnCollisionExit(Collision other)
+    private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Wendigoon"))
+        if (other.CompareTag("Wendigoon"))
         {
             isColliding = false;
         }
