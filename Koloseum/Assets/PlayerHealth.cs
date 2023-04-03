@@ -21,6 +21,9 @@ public class PlayerHealth : MonoBehaviour
     {
         hp = maxHp;
         CanvasLostDeath.SetActive(false);
+
+
+        displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 0f);
     }
 
     // Update is called once per frame
@@ -33,6 +36,23 @@ public class PlayerHealth : MonoBehaviour
         if (hp <= 0)
         {
             playerDeath();
+        }
+
+
+
+        if (isFading)
+        {
+            float newAlpha = displayText.color.a - (Time.deltaTime / fadeDuration);
+
+            if (newAlpha <= 0f)
+            {
+                isFading = false;
+                displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 0f);
+            }
+            else
+            {
+                displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, newAlpha);
+            }
         }
     }
 
@@ -52,5 +72,16 @@ public class PlayerHealth : MonoBehaviour
         efekt.effect = effect1;
 
         efekt.DecreaseSpeedReset();
+
+
+        displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 1f);
+        displayText.text = "It got HIT!";
+        isFading = true;
     }
+
+
+    public Text displayText;
+    public float fadeDuration = 1.0f;
+
+    private bool isFading = false;
 }

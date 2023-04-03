@@ -12,10 +12,26 @@ public class Efekt : MonoBehaviour
     public float barLevel;
 
     public float effect;
-    public float maxefect;
+    public float effectMax;
 
     public float constantDecrease;
     public float constantDecreaseStart;
+    public float constantDecreaseModifier;
+
+    public float distanceLongActivator;
+    public float distanceLongModifier;
+
+    public float distanceShortActivator;
+    public float distanceShortModifier;
+
+    public float tresholdLowerActivator;
+    public float tresholdLowerModifier;
+
+    public float tresholdHigherActivator;
+    public float tresholdHigherModifier;
+
+
+
 
     public GameObject CanvasLost;
     public GameObject CanvasLostEpicness;
@@ -26,11 +42,9 @@ public class Efekt : MonoBehaviour
 
     public GameObject CanvasWinLost;
 
-
-
     public Transform playerTransform;
     public Transform wendigoonTransform;
-    public float distance;
+    private float distance;
 
     //public float distanceModifier;
 
@@ -46,13 +60,15 @@ public class Efekt : MonoBehaviour
         CanvasLostEpicness.SetActive(false);
         CanvasWin.SetActive(false);
         CanvasWinLost.SetActive(false);
+
+        displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 0f);
     }
 
    
     void Update()
     {
         //bar update
-        barLevel = effect / maxefect;
+        barLevel = effect / effectMax;
         barefect.fillAmount = barLevel;
 
         if (isWorking == true && effect > 0)
@@ -60,24 +76,29 @@ public class Efekt : MonoBehaviour
             distance = Vector3.Distance(wendigoonTransform.position, playerTransform.position);
 
             effect = effect - constantDecrease;
-            constantDecrease = (float)(constantDecrease * 1.001);
+            constantDecrease = (float)(constantDecrease) * (float)(constantDecreaseModifier);
 
-            if (effect < 20)
+            if (effect < tresholdLowerActivator)
             {
-                constantDecrease = (float)(constantDecrease / 50);
+                constantDecrease = (float)(constantDecrease / tresholdLowerModifier);
+
+
+                displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 1f);
+                displayText.text = "Boo... They're just walking.";
+                isFading = true;
             }
-            if (effect > 80)
+            if (effect > tresholdHigherActivator)
             {
-                constantDecrease = (float)(constantDecrease / 20);
+                constantDecrease = (float)(constantDecrease / tresholdHigherModifier);
             }
 
-            if (distance > 13)
+            if (distance > distanceLongActivator)
             {
-                effect -= (float)(distance * 0.0005);
+                effect += (float)(distance * distanceLongModifier);
             }
-            if (distance < 5)
+            if (distance < distanceShortActivator)
             {
-                effect += (float)(distance * 0.001);
+                effect += (float)(distanceShortModifier);
             }
         }
 
@@ -135,4 +156,8 @@ public class Efekt : MonoBehaviour
         }
     }
 
+    public Text displayText;
+    private float fadeDuration = 1.0f;
+
+    private bool isFading = false;
 }

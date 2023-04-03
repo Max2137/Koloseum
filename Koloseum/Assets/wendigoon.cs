@@ -57,6 +57,9 @@ public class wendigoon : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
 
         transform.Rotate(new Vector3(0f, 180f, 0f));
+
+
+        displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 0f);
     }
 
     void Update()
@@ -139,6 +142,22 @@ public class wendigoon : MonoBehaviour
             {
                 Death();
             }
+
+
+            if (isFading)
+            {
+                float newAlpha = displayText.color.a - (Time.deltaTime / fadeDuration);
+
+                if (newAlpha <= 0f)
+                {
+                    isFading = false;
+                    displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 0f);
+                }
+                else
+                {
+                    displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, newAlpha);
+                }
+            }
         }
     }
 
@@ -212,7 +231,11 @@ public class wendigoon : MonoBehaviour
         if (isStunned == true)
         {
             HP -= 40;
-            
+
+
+            displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 1f);
+            displayText.text = "It got HIT!";
+            isFading = true;
         }
     }
 
@@ -227,4 +250,10 @@ public class wendigoon : MonoBehaviour
     {
         canMove = true;
     }
+
+
+    public Text displayText;
+    public float fadeDuration = 1.0f;
+
+    private bool isFading = false;
 }
