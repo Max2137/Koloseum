@@ -62,6 +62,15 @@ public class Efekt : MonoBehaviour
             effect = effect - constantDecrease;
             constantDecrease = (float)(constantDecrease * 1.001);
 
+            if (effect < 20)
+            {
+                constantDecrease = (float)(constantDecrease / 50);
+            }
+            if (effect > 80)
+            {
+                constantDecrease = (float)(constantDecrease / 20);
+            }
+
             if (distance > 13)
             {
                 effect -= (float)(distance * 0.0005);
@@ -78,6 +87,11 @@ public class Efekt : MonoBehaviour
             CanvasLost.SetActive(true);
             CanvasLostEpicness.SetActive(true);
             Time.timeScale = 0f;
+        }
+
+        if(effect > 100)
+        {
+            effect = 100;
         }
     }
 
