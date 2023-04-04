@@ -8,10 +8,10 @@ public class PlayerMovement : MonoBehaviour
     public float dashDistance = 5f;
     public float dashDuration = 0.2f;
     public float dashCooldown = 1f;
-    [SerializeField] private Rigidbody rb;
-    [SerializeField] private Vector3 movement;
-    [SerializeField] private bool canDash = true;
-    [SerializeField] private bool isFlying = true;
+    private Rigidbody rb;
+    private Vector3 movement;
+    private bool canDash = true;
+    private bool isFlying = true;
     public bool touchingWall = false;
 
     public wendigoon wendigoon;

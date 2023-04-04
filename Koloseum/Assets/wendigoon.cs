@@ -167,6 +167,8 @@ public class wendigoon : MonoBehaviour
 
         chargingOngoing = false;
 
+        efekt.ChargeEnd();
+
         if (touchingWall == true)
         {
             isStunned = true;
@@ -183,6 +185,7 @@ public class wendigoon : MonoBehaviour
     {
         isStunned = false;
         touchingWall = false;
+        efekt.touchingWall = touchingWall;
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
@@ -223,6 +226,7 @@ public class wendigoon : MonoBehaviour
         if (other.gameObject.CompareTag("Wall"))
         {
             touchingWall = true;
+            efekt.touchingWall = touchingWall;
         }
     }
 

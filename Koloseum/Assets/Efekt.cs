@@ -11,36 +11,42 @@ public class Efekt : MonoBehaviour
     public Image barefect;
     public float barLevel;
 
-    public float effect;
-    public float effectMax;
 
-    public float constantDecrease;
+    public float effect; //finalna statystyka
+    public float effectMax; //maksymalna wartoœæ finalnej statystyki
+
+    public float constantDecrease; //prêdkoœæ sta³ego zmniejszania finalnej statystyki
     public float constantDecreaseStart;
-    public float constantDecreaseModifier;
+    public float constantDecreaseModifier; //prêdkoœæ zwiêkszania siê prêdkoœci sta³ego zmniejszania finalnej statystyki
 
-    public float distanceLongActivator;
-    public float distanceLongModifierStart;
-    private float distanceLongModifier;
+    public float distanceLongActivator; //górna granica dystansu pomiêdzy graczem, a przeciwnikiem po której przekroczeniu za³¹cza siê poni¿szy modyfikator
+    public float distanceLongModifierStart; //modyfikator do sta³ego zmniejszania siê finalnej statystyki, który za³¹cza siê po osi¹gniêciu wy¿ej napisanego efektu
+    private float distanceLongModifier; 
 
-    public float distanceShortActivator;
-    public float distanceShortModifier;
+    public float distanceShortActivator; //dolna granica dystansu pomiêdzy graczem, a przeciwnikiem po której przekroczeniu za³¹cza siê poni¿szy modyfikator
+    public float distanceShortModifier; //modyfikator do sta³ego zmniejszania siê finalnej statystyki, który za³¹cza siê po osi¹gniêciu wy¿ej napisanego efektu
 
-    public float tresholdLowerActivator;
-    public float tresholdLowerModifier;
+    public float tresholdLowerActivator; //dolna granica pasku finalnego efektu, po której przekroczeniu za³¹cza siê poni¿szy modyfikator
+    public float tresholdLowerModifier; //modyfikator do sta³ego zmniejszania siê finalnej statystyki, który za³¹cza siê po osi¹gniêciu wy¿ej napisanego efektu
 
-    public float tresholdHigherActivator;
-    public float tresholdHigherModifier;
+    public float tresholdHigherActivator; //górna granica pasku finalnego efektu, po której przekroczeniu za³¹cza siê poni¿szy modyfikator
+    public float tresholdHigherModifier; //modyfikator do sta³ego zmniejszania siê finalnej statystyki, który za³¹cza siê po osi¹gniêciu wy¿ej napisanego efektu
 
     private float dashDistanceStart;
     private float dashDistanceEnd;
-    public float dashPremium;
-    public float dashLongDisModifDebuffer;
-    public float dashLongDisModifDebTimerStart;
+    public float dashActivatorEdge; //dodatkowy dystans dodawany do zmiennej wykrywaj¹cych ni¿szy i wy¿szy próg dystansu gracza z przeciwnikiem, aby umo¿liwiæ wiêksze pole zakresu graczowi
+    public float dashBoost; //jednorazowy boost do epickoœci, który dodaje siê jednorazowo po uciekaj¹cym dashu
+    public float dashLongDisModifDebuffer; //si³a debuffu zmniejszania siê finalnego efektu w oparciu o zbyt du¿y dystans
+    public float dashLongDisModifDebTimerStart; //czas, przez który dzia³a powy¿szy efekt
     private float dashLongDisModifDebTimer;
     private bool isDashLongDisModifDebTimerCounting;
 
-
-
+    public float distanceAfterChargeActivator; //dystans pomiêdzy graczem, a przeciwnikiem, w chwili kiedy ten koñczy szar¿owanie
+    public float distanceAfterChargeBoost; //jednorazowy boost do epickoœci, który dodaje siê jednorazowo po osi¹gniêciu wy¿ej napisanego efektu
+    public float distanceAfterChargeDebuffer; //si³a debuffu zmniejszania siê finalnego efektu w oparciu o zbyt du¿y dystans
+    public float distanceLongDisModifDebTimerStart; //czas, przez który dzia³a powy¿szy efekt
+    private float distanceLongDisModifDebTimer;
+    private bool isDistanceLongDisModifDebTimerCounting;
 
 
     public GameObject CanvasLost;
@@ -56,13 +62,13 @@ public class Efekt : MonoBehaviour
     public Transform wendigoonTransform;
     private float distance;
 
+    public bool touchingWall;
+
     //public float distanceModifier;
 
     public void start()
     {
         isWorking = true;
-
-        isDashLongDisModifDebTimerCounting = false;
     }
 
     void Start()
@@ -76,7 +82,14 @@ public class Efekt : MonoBehaviour
         displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 0f);
 
         dashLongDisModifDebTimer = dashLongDisModifDebTimerStart;
+        distanceLongDisModifDebTimer = distanceLongDisModifDebTimerStart;
+
         distanceLongModifier = distanceLongModifierStart;
+
+        touchingWall = false;
+
+        isDashLongDisModifDebTimerCounting = false;
+        isDistanceLongDisModifDebTimerCounting = false;
     }
 
    
@@ -140,6 +153,17 @@ public class Efekt : MonoBehaviour
             isDashLongDisModifDebTimerCounting = false;
             distanceLongModifier = distanceLongModifierStart;
         }
+
+        if(isDistanceLongDisModifDebTimerCounting == true)
+        {
+            distanceLongDisModifDebTimer -= 1;
+            distanceLongModifier *= distanceAfterChargeDebuffer;
+        }
+        if(distanceLongDisModifDebTimer < 0)
+        {
+            isDistanceLongDisModifDebTimerCounting = false;
+            distanceLongModifier = distanceLongModifierStart;
+        }
     }
 
     public void DecreaseSpeedReset()
@@ -190,16 +214,28 @@ public class Efekt : MonoBehaviour
     {
         Invoke("DashEndCounting", 1/25);
     }
+
     public void DashEndCounting()
     {
         dashDistanceEnd = distance;
 
-        if (dashDistanceStart < distanceShortActivator && dashDistanceEnd > distanceLongActivator)
+        if (dashDistanceStart < distanceShortActivator + dashActivatorEdge && dashDistanceEnd > distanceLongActivator - dashActivatorEdge)
         {
-            effect += dashPremium;
+            effect += dashBoost;
 
             dashLongDisModifDebTimer = dashLongDisModifDebTimerStart;
             isDashLongDisModifDebTimerCounting = true;
+        }
+    }
+
+    public void ChargeEnd()
+    {
+        if (distance < distanceAfterChargeActivator && touchingWall == true)
+        {
+            effect += distanceAfterChargeBoost;
+
+            distanceLongDisModifDebTimer = distanceLongDisModifDebTimerStart;
+            isDistanceLongDisModifDebTimerCounting = true;
         }
     }
 

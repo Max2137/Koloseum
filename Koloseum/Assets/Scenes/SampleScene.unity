@@ -977,14 +977,19 @@ MonoBehaviour:
   distanceLongActivator: 15
   distanceLongModifierStart: -0.00125
   distanceShortActivator: 9
-  distanceShortModifier: 0.0015
+  distanceShortModifier: 0.001
   tresholdLowerActivator: 20
-  tresholdLowerModifier: 1.01
+  tresholdLowerModifier: 1.005
   tresholdHigherActivator: 80
   tresholdHigherModifier: 1.01
-  dashPremium: 5
-  dashLongDisModifDebuffer: 0.9
+  dashActivatorEdge: 3
+  dashBoost: 3
+  dashLongDisModifDebuffer: 0.5
   dashLongDisModifDebTimerStart: 180
+  distanceAfterChargeActivator: 5
+  distanceAfterChargeBoost: 5
+  distanceAfterChargeDebuffer: 0.75
+  distanceLongDisModifDebTimerStart: 60
   CanvasLost: {fileID: 746032171}
   CanvasLostEpicness: {fileID: 2083141019}
   CanvasLostDeath: {fileID: 397968144}
@@ -992,6 +997,7 @@ MonoBehaviour:
   CanvasWinLost: {fileID: 1124676558}
   playerTransform: {fileID: 420665203}
   wendigoonTransform: {fileID: 1788483463}
+  touchingWall: 0
   displayText: {fileID: 641863200}
 --- !u!4 &616331603
 Transform:
