@@ -79,8 +79,6 @@ public class Efekt : MonoBehaviour
         CanvasWin.SetActive(false);
         CanvasWinLost.SetActive(false);
 
-        displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 0f);
-
         dashLongDisModifDebTimer = dashLongDisModifDebTimerStart;
         distanceLongDisModifDebTimer = distanceLongDisModifDebTimerStart;
 
@@ -90,6 +88,8 @@ public class Efekt : MonoBehaviour
 
         isDashLongDisModifDebTimerCounting = false;
         isDistanceLongDisModifDebTimerCounting = false;
+
+        displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 0f);
     }
 
    
@@ -109,7 +109,6 @@ public class Efekt : MonoBehaviour
             if (effect < tresholdLowerActivator)
             {
                 constantDecrease = (float)(constantDecrease / tresholdLowerModifier);
-
 
                 displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 1f);
                 displayText.text = "Boo... They're just walking.";
@@ -163,6 +162,21 @@ public class Efekt : MonoBehaviour
         {
             isDistanceLongDisModifDebTimerCounting = false;
             distanceLongModifier = distanceLongModifierStart;
+        }
+
+        if (isFading)
+        {
+            float newAlpha = displayText.color.a - (Time.deltaTime / fadeDuration);
+
+            if (newAlpha <= 0f)
+            {
+                isFading = false;
+                displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 0f);
+            }
+            else
+            {
+                displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, newAlpha);
+            }
         }
     }
 
@@ -236,11 +250,15 @@ public class Efekt : MonoBehaviour
 
             distanceLongDisModifDebTimer = distanceLongDisModifDebTimerStart;
             isDistanceLongDisModifDebTimerCounting = true;
+
+            displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 1f);
+            displayText.text = "It was almost hit!";
+            isFading = true;
         }
     }
 
     public Text displayText;
+    
     private float fadeDuration = 1.0f;
-
     private bool isFading = false;
 }

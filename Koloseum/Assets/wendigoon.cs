@@ -116,7 +116,7 @@ public class wendigoon : MonoBehaviour
 
             if (isStunned == true)
             {
-                GetComponent<Rigidbody>().isKinematic = true;
+                //GetComponent<Rigidbody>().isKinematic = true;
 
                 rb.velocity = Vector3.zero;
 
