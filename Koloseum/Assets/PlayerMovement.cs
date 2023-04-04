@@ -47,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
         if (canDash && Input.GetKeyDown(KeyCode.Space) && isFlying == false)
         {
             StartCoroutine(Dash());
+
+            efekt.DashStart();
         }
     }
 
@@ -68,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
+        efekt.DashEnd();
     }
     public void forceStop()
     {

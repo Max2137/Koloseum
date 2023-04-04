@@ -974,14 +974,17 @@ MonoBehaviour:
   constantDecrease: 0
   constantDecreaseStart: 0.003
   constantDecreaseModifier: 1.001
-  distanceLongActivator: 9
-  distanceLongModifier: -0.00125
-  distanceShortActivator: 15
+  distanceLongActivator: 15
+  distanceLongModifierStart: -0.00125
+  distanceShortActivator: 9
   distanceShortModifier: 0.0015
   tresholdLowerActivator: 20
   tresholdLowerModifier: 1.01
   tresholdHigherActivator: 80
   tresholdHigherModifier: 1.01
+  dashPremium: 5
+  dashLongDisModifDebuffer: 0.9
+  dashLongDisModifDebTimerStart: 180
   CanvasLost: {fileID: 746032171}
   CanvasLostEpicness: {fileID: 2083141019}
   CanvasLostDeath: {fileID: 397968144}

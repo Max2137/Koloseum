@@ -19,7 +19,8 @@ public class Efekt : MonoBehaviour
     public float constantDecreaseModifier;
 
     public float distanceLongActivator;
-    public float distanceLongModifier;
+    public float distanceLongModifierStart;
+    private float distanceLongModifier;
 
     public float distanceShortActivator;
     public float distanceShortModifier;
@@ -29,6 +30,15 @@ public class Efekt : MonoBehaviour
 
     public float tresholdHigherActivator;
     public float tresholdHigherModifier;
+
+    private float dashDistanceStart;
+    private float dashDistanceEnd;
+    public float dashPremium;
+    public float dashLongDisModifDebuffer;
+    public float dashLongDisModifDebTimerStart;
+    private float dashLongDisModifDebTimer;
+    private bool isDashLongDisModifDebTimerCounting;
+
 
 
 
@@ -51,6 +61,8 @@ public class Efekt : MonoBehaviour
     public void start()
     {
         isWorking = true;
+
+        isDashLongDisModifDebTimerCounting = false;
     }
 
     void Start()
@@ -62,6 +74,9 @@ public class Efekt : MonoBehaviour
         CanvasWinLost.SetActive(false);
 
         displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 0f);
+
+        dashLongDisModifDebTimer = dashLongDisModifDebTimerStart;
+        distanceLongModifier = distanceLongModifierStart;
     }
 
    
@@ -114,6 +129,17 @@ public class Efekt : MonoBehaviour
         {
             effect = 100;
         }
+
+        if(isDashLongDisModifDebTimerCounting == true)
+        {
+            dashLongDisModifDebTimer -= 1;
+            distanceLongModifier *= dashLongDisModifDebuffer;
+        }
+        if(dashLongDisModifDebTimer < 0)
+        {
+            isDashLongDisModifDebTimerCounting = false;
+            distanceLongModifier = distanceLongModifierStart;
+        }
     }
 
     public void DecreaseSpeedReset()
@@ -153,6 +179,27 @@ public class Efekt : MonoBehaviour
             CanvasLost.SetActive(true);
             CanvasWinLost.SetActive(true);
             Time.timeScale = 0f;
+        }
+    }
+
+    public void DashStart()
+    {
+        dashDistanceStart = distance;
+    }
+    public void DashEnd()
+    {
+        Invoke("DashEndCounting", 1/25);
+    }
+    public void DashEndCounting()
+    {
+        dashDistanceEnd = distance;
+
+        if (dashDistanceStart < distanceShortActivator && dashDistanceEnd > distanceLongActivator)
+        {
+            effect += dashPremium;
+
+            dashLongDisModifDebTimer = dashLongDisModifDebTimerStart;
+            isDashLongDisModifDebTimerCounting = true;
         }
     }
 
