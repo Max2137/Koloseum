@@ -16,6 +16,8 @@ public class PlayerHealth : MonoBehaviour
 
     public float effect1;
 
+    public bool isColliding;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,8 @@ public class PlayerHealth : MonoBehaviour
 
 
         displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 0f);
+
+        isColliding = false;
     }
 
     // Update is called once per frame
@@ -78,10 +82,51 @@ public class PlayerHealth : MonoBehaviour
         displayText.text = "It got HIT!";
         isFading = true;
     }
+    public void GolemHit()
+    {
+        if (isColliding == true)
+        {
+            hp -= 40;
+
+            effect1 = efekt.effect;
+            effect1 += 5;
+            efekt.effect = effect1;
+
+            //efekt.DecreaseSpeedReset();
+
+
+            displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 1f);
+            displayText.text = "It got HIT!";
+            isFading = true;
+        }
+    }
 
 
     public Text displayText;
     public float fadeDuration = 1.0f;
 
     private bool isFading = false;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Wendigoon") || other.CompareTag("Golem"))
+        {
+            isColliding = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Wendigoon") || other.CompareTag("Golem"))
+        {
+            isColliding = false;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Rock"))
+        {
+            hp -= 10;
+        }
+    }
 }

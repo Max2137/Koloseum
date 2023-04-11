@@ -8,25 +8,35 @@ public class PlayerMovement : MonoBehaviour
     public float dashDistance = 5f;
     public float dashDuration = 0.2f;
     public float dashCooldown = 1f;
-    private Rigidbody rb;
+    public Rigidbody rb;
     private Vector3 movement;
-    private bool canDash = true;
+    public bool canDash = true;
+    public bool isDashing;
     private bool isFlying = true;
     public bool touchingWall = false;
-
     public wendigoon wendigoon;
+    public EnemyGolem enemyGolem;
     public Efekt efekt;
+    public PlayerAttack playerAttack;
+    public bool isStunned;
+    public float StunnedTimer;
+    public float StunnedTimerStart;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
 
         transform.Rotate(new Vector3(0f, -90f, 0f));
+
+        isDashing = false;
+        isStunned = false;
+
+        StunnedTimer = StunnedTimerStart;
     }
 
     void FixedUpdate()
     {
-        if (isFlying == false) 
+        if (isFlying == false && isStunned == false) 
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
@@ -44,17 +54,34 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (canDash && Input.GetKeyDown(KeyCode.Space) && isFlying == false)
+        if (canDash && Input.GetKeyDown(KeyCode.Space) && isFlying == false && isStunned == false)
         {
             StartCoroutine(Dash());
 
-            efekt.DashStart();
+            if (wendigoon != null || enemyGolem != null)
+            {
+                efekt.DashStart();
+            }
+        }
+
+        if (isStunned == true)
+        {
+            StunnedTimer -= 1;
+        }
+
+        if (StunnedTimer <= 0)
+        {
+            isStunned = false;
+            StunnedTimer = StunnedTimerStart;
         }
     }
 
     IEnumerator Dash()
     {
+        Invoke("DashEndAttack", dashDuration);
+
         canDash = false;
+        isDashing = true;
         Vector3 dashDirection = movement.magnitude > 0f ? movement.normalized : transform.forward;
         float dashDistanceRemaining = dashDistance;
         float dashTimer = 0f;
@@ -70,7 +97,12 @@ public class PlayerMovement : MonoBehaviour
 
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
-        efekt.DashEnd();
+
+        if (wendigoon != null || enemyGolem != null)
+        {
+            efekt.DashEnd();
+            isDashing = false;
+        }
     }
     public void forceStop()
     {
@@ -84,8 +116,17 @@ public class PlayerMovement : MonoBehaviour
         {
             //Debug.Log("Touched grass");
             isFlying = false;
-            wendigoon.StartMove();
-            efekt.start();
+            
+            if (wendigoon != null)
+            {
+                wendigoon.StartMove();
+                efekt.start();
+            }
+            if (enemyGolem != null)
+            {
+                enemyGolem.StartMove();
+                efekt.start();
+            }
         }
 
         if (other.gameObject.CompareTag("Wall"))
@@ -101,5 +142,10 @@ public class PlayerMovement : MonoBehaviour
             touchingWall = false;
             //Debug.Log("Stop touched wall");
         }
+    }
+
+    public void DashEndAttack()
+    {
+        playerAttack.DashEnd();
     }
 }

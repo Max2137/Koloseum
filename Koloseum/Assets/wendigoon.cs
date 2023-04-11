@@ -243,6 +243,18 @@ public class wendigoon : MonoBehaviour
         }
     }
 
+    public void DashAttacked()
+    {
+        HP -= 50;
+        isStunned = true;
+        chargingOngoing = false;
+        Invoke("stunningStop", stunningDuration);
+
+        displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 1f);
+        displayText.text = "It got HIT so hard!";
+        isFading = true;
+    }
+
     public void Death()
     {
         efekt.End();
@@ -253,6 +265,17 @@ public class wendigoon : MonoBehaviour
     public void StartMove()
     {
         canMove = true;
+    }
+
+
+    void OnTriggerEnter(Collider other)
+    {
+        // Check if the other collider has the tag "Player"
+        if (other.CompareTag("Bullet"))
+        {
+            Destroy(other.gameObject);
+            HP -= 3;
+        }
     }
 
 

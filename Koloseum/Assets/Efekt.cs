@@ -48,6 +48,12 @@ public class Efekt : MonoBehaviour
     private float distanceLongDisModifDebTimer;
     private bool isDistanceLongDisModifDebTimerCounting;
 
+    public float activeBullets;
+    public float activeBulletsCooldownStart;
+    private float activeBulletsCooldown;
+    public float activeBulletsClimaxPoint;
+    public float activeBulletsModifier;
+
 
     public GameObject CanvasLost;
     public GameObject CanvasLostEpicness;
@@ -60,7 +66,8 @@ public class Efekt : MonoBehaviour
 
     public Transform playerTransform;
     public Transform wendigoonTransform;
-    private float distance;
+    public Transform golemTransform;
+    [SerializeField] private float distance;
 
     public bool touchingWall;
 
@@ -82,6 +89,8 @@ public class Efekt : MonoBehaviour
         dashLongDisModifDebTimer = dashLongDisModifDebTimerStart;
         distanceLongDisModifDebTimer = distanceLongDisModifDebTimerStart;
 
+        activeBulletsCooldown = activeBulletsCooldownStart;
+
         distanceLongModifier = distanceLongModifierStart;
 
         touchingWall = false;
@@ -101,7 +110,15 @@ public class Efekt : MonoBehaviour
 
         if (isWorking == true && effect > 0)
         {
-            distance = Vector3.Distance(wendigoonTransform.position, playerTransform.position);
+            if (wendigoonTransform != null)
+            {
+                distance = Vector3.Distance(wendigoonTransform.position, playerTransform.position);
+            }
+            if (golemTransform != null)
+            {
+                distance = Vector3.Distance(golemTransform.position, playerTransform.position);
+            }
+
 
             effect = effect - constantDecrease;
             constantDecrease = (float)(constantDecrease) * (float)(constantDecreaseModifier);
@@ -178,6 +195,20 @@ public class Efekt : MonoBehaviour
                 displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, newAlpha);
             }
         }
+
+        if (activeBullets > 0)
+        {
+            activeBulletsCooldown -= 1;
+        }
+        if (activeBulletsCooldown <= 0)
+        {
+            activeBulletsCooldown = activeBulletsCooldownStart;
+            activeBullets -= 1;
+        }
+
+        //effect += activeBulletsModifier / 1000;
+
+
     }
 
     public void DecreaseSpeedReset()
