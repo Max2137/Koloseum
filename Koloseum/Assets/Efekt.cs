@@ -11,40 +11,40 @@ public class Efekt : MonoBehaviour
     public Image barefect;
     public float barLevel;
 
-
+[Header("Alleluja")] 
     public float effect; //finalna statystyka
-    public float effectMax; //maksymalna wartoœæ finalnej statystyki
-
-    public float constantDecrease; //prêdkoœæ sta³ego zmniejszania finalnej statystyki
+    public float effectMax; //maksymalna wartoï¿½ï¿½ finalnej statystyki
+[Range(0,10)]
+    public float constantDecrease; //prï¿½dkoï¿½ï¿½ staï¿½ego zmniejszania finalnej statystyki
     public float constantDecreaseStart;
-    public float constantDecreaseModifier; //prêdkoœæ zwiêkszania siê prêdkoœci sta³ego zmniejszania finalnej statystyki
+    public float constantDecreaseModifier; //prï¿½dkoï¿½ï¿½ zwiï¿½kszania siï¿½ prï¿½dkoï¿½ci staï¿½ego zmniejszania finalnej statystyki
 
-    public float distanceLongActivator; //górna granica dystansu pomiêdzy graczem, a przeciwnikiem po której przekroczeniu za³¹cza siê poni¿szy modyfikator
-    public float distanceLongModifierStart; //modyfikator do sta³ego zmniejszania siê finalnej statystyki, który za³¹cza siê po osi¹gniêciu wy¿ej napisanego efektu
+    public float distanceLongActivator; //gï¿½rna granica dystansu pomiï¿½dzy graczem, a przeciwnikiem po ktï¿½rej przekroczeniu zaï¿½ï¿½cza siï¿½ poniï¿½szy modyfikator
+    public float distanceLongModifierStart; //modyfikator do staï¿½ego zmniejszania siï¿½ finalnej statystyki, ktï¿½ry zaï¿½ï¿½cza siï¿½ po osiï¿½gniï¿½ciu wyï¿½ej napisanego efektu
     private float distanceLongModifier; 
 
-    public float distanceShortActivator; //dolna granica dystansu pomiêdzy graczem, a przeciwnikiem po której przekroczeniu za³¹cza siê poni¿szy modyfikator
-    public float distanceShortModifier; //modyfikator do sta³ego zmniejszania siê finalnej statystyki, który za³¹cza siê po osi¹gniêciu wy¿ej napisanego efektu
+    public float distanceShortActivator; //dolna granica dystansu pomiï¿½dzy graczem, a przeciwnikiem po ktï¿½rej przekroczeniu zaï¿½ï¿½cza siï¿½ poniï¿½szy modyfikator
+    public float distanceShortModifier; //modyfikator do staï¿½ego zmniejszania siï¿½ finalnej statystyki, ktï¿½ry zaï¿½ï¿½cza siï¿½ po osiï¿½gniï¿½ciu wyï¿½ej napisanego efektu
 
-    public float tresholdLowerActivator; //dolna granica pasku finalnego efektu, po której przekroczeniu za³¹cza siê poni¿szy modyfikator
-    public float tresholdLowerModifier; //modyfikator do sta³ego zmniejszania siê finalnej statystyki, który za³¹cza siê po osi¹gniêciu wy¿ej napisanego efektu
+    public float tresholdLowerActivator; //dolna granica pasku finalnego efektu, po ktï¿½rej przekroczeniu zaï¿½ï¿½cza siï¿½ poniï¿½szy modyfikator
+    public float tresholdLowerModifier; //modyfikator do staï¿½ego zmniejszania siï¿½ finalnej statystyki, ktï¿½ry zaï¿½ï¿½cza siï¿½ po osiï¿½gniï¿½ciu wyï¿½ej napisanego efektu
 
-    public float tresholdHigherActivator; //górna granica pasku finalnego efektu, po której przekroczeniu za³¹cza siê poni¿szy modyfikator
-    public float tresholdHigherModifier; //modyfikator do sta³ego zmniejszania siê finalnej statystyki, który za³¹cza siê po osi¹gniêciu wy¿ej napisanego efektu
+    public float tresholdHigherActivator; //gï¿½rna granica pasku finalnego efektu, po ktï¿½rej przekroczeniu zaï¿½ï¿½cza siï¿½ poniï¿½szy modyfikator
+    public float tresholdHigherModifier; //modyfikator do staï¿½ego zmniejszania siï¿½ finalnej statystyki, ktï¿½ry zaï¿½ï¿½cza siï¿½ po osiï¿½gniï¿½ciu wyï¿½ej napisanego efektu
 
     private float dashDistanceStart;
     private float dashDistanceEnd;
-    public float dashActivatorEdge; //dodatkowy dystans dodawany do zmiennej wykrywaj¹cych ni¿szy i wy¿szy próg dystansu gracza z przeciwnikiem, aby umo¿liwiæ wiêksze pole zakresu graczowi
-    public float dashBoost; //jednorazowy boost do epickoœci, który dodaje siê jednorazowo po uciekaj¹cym dashu
-    public float dashLongDisModifDebuffer; //si³a debuffu zmniejszania siê finalnego efektu w oparciu o zbyt du¿y dystans
-    public float dashLongDisModifDebTimerStart; //czas, przez który dzia³a powy¿szy efekt
+    public float dashActivatorEdge; //dodatkowy dystans dodawany do zmiennej wykrywajï¿½cych niï¿½szy i wyï¿½szy prï¿½g dystansu gracza z przeciwnikiem, aby umoï¿½liwiï¿½ wiï¿½ksze pole zakresu graczowi
+    public float dashBoost; //jednorazowy boost do epickoï¿½ci, ktï¿½ry dodaje siï¿½ jednorazowo po uciekajï¿½cym dashu
+    public float dashLongDisModifDebuffer; //siï¿½a debuffu zmniejszania siï¿½ finalnego efektu w oparciu o zbyt duï¿½y dystans
+    public float dashLongDisModifDebTimerStart; //czas, przez ktï¿½ry dziaï¿½a powyï¿½szy efekt
     private float dashLongDisModifDebTimer;
     private bool isDashLongDisModifDebTimerCounting;
 
-    public float distanceAfterChargeActivator; //dystans pomiêdzy graczem, a przeciwnikiem, w chwili kiedy ten koñczy szar¿owanie
-    public float distanceAfterChargeBoost; //jednorazowy boost do epickoœci, który dodaje siê jednorazowo po osi¹gniêciu wy¿ej napisanego efektu
-    public float distanceAfterChargeDebuffer; //si³a debuffu zmniejszania siê finalnego efektu w oparciu o zbyt du¿y dystans
-    public float distanceLongDisModifDebTimerStart; //czas, przez który dzia³a powy¿szy efekt
+    public float distanceAfterChargeActivator; //dystans pomiï¿½dzy graczem, a przeciwnikiem, w chwili kiedy ten koï¿½czy szarï¿½owanie
+    public float distanceAfterChargeBoost; //jednorazowy boost do epickoï¿½ci, ktï¿½ry dodaje siï¿½ jednorazowo po osiï¿½gniï¿½ciu wyï¿½ej napisanego efektu
+    public float distanceAfterChargeDebuffer; //siï¿½a debuffu zmniejszania siï¿½ finalnego efektu w oparciu o zbyt duï¿½y dystans
+    public float distanceLongDisModifDebTimerStart; //czas, przez ktï¿½ry dziaï¿½a powyï¿½szy efekt
     private float distanceLongDisModifDebTimer;
     private bool isDistanceLongDisModifDebTimerCounting;
 
