@@ -30,10 +30,16 @@ public class PlayerAttack : MonoBehaviour
 
     public GameObject bulletPrefab;
 
+    public bool didAttackedRecently;
+
+
+    public AudioClip audioClip;
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -76,6 +82,10 @@ public class PlayerAttack : MonoBehaviour
                         efekt.effect = effect1;
 
                         efekt.DecreaseSpeedReset();
+
+                        audioSource.clip = audioClip;
+
+                        audioSource.Play();
                     }
 
                     /*    if (playerMovement.isDashing == false)
@@ -97,6 +107,9 @@ public class PlayerAttack : MonoBehaviour
                             didHit = true;
                         }
                   */
+
+
+
                 }
 
                 cooldownAttackQuick = 250;

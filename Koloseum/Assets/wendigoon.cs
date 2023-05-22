@@ -50,6 +50,10 @@ public class wendigoon : MonoBehaviour
 
     public Efekt efekt;
 
+
+    public AudioClip audioClip;
+    private AudioSource audioSource;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -60,6 +64,9 @@ public class wendigoon : MonoBehaviour
 
 
         displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 0f);
+
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -173,6 +180,13 @@ public class wendigoon : MonoBehaviour
         {
             isStunned = true;
             chargingOngoing = false;
+
+
+            audioSource.clip = audioClip;
+
+            audioSource.Play();
+
+
             Invoke("stunningStop", stunningDuration);
         }
         else

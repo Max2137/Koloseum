@@ -71,6 +71,10 @@ public class Efekt : MonoBehaviour
 
     public bool touchingWall;
 
+    public AudioClip audioClip;
+    private AudioSource audioSource;
+
+    public float volume = 50f;
     //public float distanceModifier;
 
     public void start()
@@ -99,6 +103,10 @@ public class Efekt : MonoBehaviour
         isDistanceLongDisModifDebTimerCounting = false;
 
         displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 0f);
+
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.ignoreListenerVolume = true;
     }
 
    
@@ -209,6 +217,11 @@ public class Efekt : MonoBehaviour
         //effect += activeBulletsModifier / 1000;
 
 
+        // Zamień procent na wartość z zakresu 0-1
+        volume = effect / 100f;
+
+        // Ustaw nową głośność
+        audioSource.volume = volume;
     }
 
     public void DecreaseSpeedReset()
