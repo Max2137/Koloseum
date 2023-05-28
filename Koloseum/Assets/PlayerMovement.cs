@@ -106,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void forceStop()
     {
+        if (rb == null) { return; }
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
     }

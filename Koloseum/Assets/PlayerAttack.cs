@@ -78,25 +78,8 @@ public class PlayerAttack : MonoBehaviour
                         efekt.DecreaseSpeedReset();
                     }
 
-                    /*    if (playerMovement.isDashing == false)
-                        {
-                            if (isColliding == true)
-                            {
-                                wendigoon.QickAttacked();
-                                //Debug.Log("Atakuje");
-
-                                effect1 = efekt.effect;
-                                effect1 += 15;
-                                efekt.effect = effect1;
-
-                                efekt.DecreaseSpeedReset();
-                            }
-                        }
-                        else
-                        {
-                            didHit = true;
-                        }
-                  */
+                    
+                  
                 }
 
                 cooldownAttackQuick = 250;
@@ -120,12 +103,13 @@ public class PlayerAttack : MonoBehaviour
 
                         //efekt.DecreaseSpeedReset();
                     }
-                    /*     if (playerMovement.isDashing == false)
+
+                    if (playerMovement.isDashing == true)
                          {
                              if (isColliding == true)
                              {
                                  enemyGolem.QickAttacked();
-                                 //Debug.Log("Atakuje");
+                                 Debug.Log("Atakuje");
 
                                  effect1 = efekt.effect;
                                  effect1 += 5;
@@ -138,7 +122,7 @@ public class PlayerAttack : MonoBehaviour
                          {
                              didHit = true;
                          }
-                    */
+                    
                 }
 
                 cooldownAttackQuick = 250;
@@ -197,6 +181,33 @@ public class PlayerAttack : MonoBehaviour
 
                     //Debug.Log("Push!");
                 }
+            }
+        }
+
+        
+        if (other.CompareTag("Wendigoon") || other.CompareTag("Golem")) {
+            if (playerMovement.isDashing == true)
+            {
+                if (isColliding == true)
+                {
+                    
+                    other.GetComponent<IMonster>().Stun();
+                    if (other.CompareTag("Golem"))
+                        other.GetComponent<IMonster>().QickAttacked(10);
+                    else 
+                        other.GetComponent<IMonster>().QickAttacked(80);
+                    Debug.Log("Atakuje");
+
+                    effect1 = efekt.effect;
+                    effect1 += 5;
+                    efekt.effect = effect1;
+
+                    //efekt.DecreaseSpeedReset();
+                }
+            }
+            else
+            {
+                didHit = true;
             }
         }
     }
