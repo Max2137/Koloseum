@@ -4,13 +4,17 @@ using UnityEngine;
 
 using UnityEngine.UI;
 
-public class EnemyGolem : MonoBehaviour
+public class EnemyGolem : MonoBehaviour, IMonster
 {
     public Transform player;
     private float fixedYValue = 0.8f;
     private float distance;
     private bool isStarted;
     private bool isTouchingPlayer;
+
+    
+    public bool isStunned = false;
+    public float stunningDuration = 2f;
 
 
     private float hp;
@@ -87,9 +91,18 @@ public class EnemyGolem : MonoBehaviour
         InvokeRepeating("PlayerPositionActualization", 0, rockEscapeTime);
     }
 
-    public void QickAttacked()
+    public void Stun() {
+        isStunned = true;
+        Invoke("stunningStop", stunningDuration + 10f);
+    }
+
+    void stunningStop() {
+        isStunned = false;
+    }
+
+    public void QickAttacked(int DealHP = 40)
     {
-        hp -= 40;
+        hp -= DealHP;
     }
 
     public void StartMove()
@@ -104,6 +117,9 @@ public class EnemyGolem : MonoBehaviour
         barImage2.fillAmount = barLevel;
 
         transform.position = new Vector3(transform.position.x, fixedYValue, transform.position.z);
+        if (player == null) return;
+
+
         distance = Vector3.Distance(transform.position, player.position);
 
         isTouchingPlayer = playerHealth.isColliding;
@@ -115,9 +131,21 @@ public class EnemyGolem : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (isStunned == true)
+        {
+            Quaternion originalRotation = transform.rotation;
+
+            // Create a new Vector3 with the y-axis rotation of the original transform and zero values for x and z
+            Vector3 newRotation = new Vector3(0f, originalRotation.eulerAngles.y, 0f);
+
+            // Set the rotation of the transform to the new Vector3
+            transform.rotation = Quaternion.Euler(newRotation);
+            return;
+        }
+
         if (isStarted == true)
         {
-            if (isFollowing == true)
+            if (isFollowing == true && isStunned == false)
             {
                 transform.LookAt(player);
                 transform.Translate(Vector3.forward * speed * Time.deltaTime);
@@ -184,6 +212,9 @@ public class EnemyGolem : MonoBehaviour
                     Invoke("StartRockRingSpawn", rockingStart);
                 }
             }
+
+            
+
             if (distance > hitDistance)
             {
                 isRocking = true;
@@ -207,6 +238,10 @@ public class EnemyGolem : MonoBehaviour
     }
     public void spawnRock()
     {
+        if (isStunned == true) {
+            return;
+        }
+
         if (isRocking && isFollowing)
         {
             playerPosition.y = 1;
@@ -217,6 +252,8 @@ public class EnemyGolem : MonoBehaviour
     }
     public void PlayerPositionActualization()
     {
+        if (player == null) return;
+
         playerPosition = player.transform.position;
     }
 
@@ -226,6 +263,10 @@ public class EnemyGolem : MonoBehaviour
     }
     private IEnumerator SpawnRockRing()
     {
+        if (isStunned == true) {
+            yield return null;
+        }
+
         Vector3 center = transform.position; // Get player's position
 
         for (int z = 0; z < numCircles; z++)
@@ -263,6 +304,10 @@ public class EnemyGolem : MonoBehaviour
 
     private IEnumerator SpawnRockLine()
     {
+        if (isStunned == true) {
+            yield return null;
+        }
+
         PlayerPositionActualization();
 
         isFollowing = false;

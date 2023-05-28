@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class wendigoon : MonoBehaviour
+public class wendigoon : MonoBehaviour, IMonster
 {
     public float fixedYValue = 1.73f;
 
@@ -50,10 +50,6 @@ public class wendigoon : MonoBehaviour
 
     public Efekt efekt;
 
-
-    public AudioClip audioClip;
-    private AudioSource audioSource;
-
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -64,9 +60,6 @@ public class wendigoon : MonoBehaviour
 
 
         displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 0f);
-
-
-        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -180,13 +173,6 @@ public class wendigoon : MonoBehaviour
         {
             isStunned = true;
             chargingOngoing = false;
-
-
-            audioSource.clip = audioClip;
-
-            audioSource.Play();
-
-
             Invoke("stunningStop", stunningDuration);
         }
         else
@@ -244,16 +230,22 @@ public class wendigoon : MonoBehaviour
         }
     }
 
-    public void QickAttacked()
+    public void Stun() {
+        isStunned = true;
+        Invoke("stunningStop", stunningDuration + 8f);
+    }
+
+    public void QickAttacked(int DealHP = 40)
     {
         if (isStunned == true)
         {
-            HP -= 40;
+            HP -= DealHP;
 
 
             displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 1f);
             displayText.text = "It got HIT!";
             isFading = true;
+            
         }
     }
 

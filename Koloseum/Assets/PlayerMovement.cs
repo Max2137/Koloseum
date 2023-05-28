@@ -22,9 +22,6 @@ public class PlayerMovement : MonoBehaviour
     public float StunnedTimer;
     public float StunnedTimerStart;
 
-    public AudioClip audioClip;
-    private AudioSource audioSource;
-
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -35,9 +32,6 @@ public class PlayerMovement : MonoBehaviour
         isStunned = false;
 
         StunnedTimer = StunnedTimerStart;
-
-
-        audioSource = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -63,10 +57,6 @@ public class PlayerMovement : MonoBehaviour
         if (canDash && Input.GetKeyDown(KeyCode.Space) && isFlying == false && isStunned == false)
         {
             StartCoroutine(Dash());
-
-            audioSource.clip = audioClip;
-
-            audioSource.Play();
 
             if (wendigoon != null || enemyGolem != null)
             {
@@ -116,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void forceStop()
     {
+        if (rb == null) { return; }
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
     }
