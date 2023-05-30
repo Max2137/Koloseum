@@ -544,7 +544,6 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -604,7 +603,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 331.09998, y: 199.90002}
+  m_AnchoredPosition: {x: 331.09998, y: 167.90004}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &417136386
@@ -742,7 +741,6 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1275,7 +1273,6 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1709,7 +1706,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -332.00003, y: 199.9}
+  m_AnchoredPosition: {x: -332.00003, y: 167.9}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &847033943
@@ -2080,7 +2077,6 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -2110,7 +2106,6 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 28be426a8f077f8409d373ab2841d19f, type: 3}
@@ -2254,25 +2249,6 @@ PrefabInstance:
       value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 28be426a8f077f8409d373ab2841d19f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 449489869}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 28be426a8f077f8409d373ab2841d19f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 834767727}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 28be426a8f077f8409d373ab2841d19f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1243129253}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 28be426a8f077f8409d373ab2841d19f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1403655098}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 28be426a8f077f8409d373ab2841d19f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1516660772}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 28be426a8f077f8409d373ab2841d19f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1871941224}
   m_SourcePrefab: {fileID: 100100000, guid: 28be426a8f077f8409d373ab2841d19f, type: 3}
 --- !u!1 &1243129252
 GameObject:
@@ -2772,7 +2748,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000076293945, y: 199.9}
+  m_AnchoredPosition: {x: 0.0000076293945, y: 167.90001}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1646736368
@@ -2894,7 +2870,6 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -3140,7 +3115,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 28.702026, y: -397.5}
+  m_AnchoredPosition: {x: 28.702026, y: -334.5}
   m_SizeDelta: {x: 32.4035, y: 32.4035}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1781385921
@@ -3248,8 +3223,6 @@ MonoBehaviour:
   golemTransform: {fileID: 543450652581563714}
   distance: 0
   touchingWall: 0
-  audioClip: {fileID: 0}
-  volume: 50
   displayText: {fileID: 641863200}
 --- !u!4 &1783470242
 Transform:
@@ -3714,7 +3687,6 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -3775,7 +3747,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 28.702026, y: -397.5}
+  m_AnchoredPosition: {x: 28.702026, y: -334.5}
   m_SizeDelta: {x: 36.0039, y: 36.0039}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1952544988
@@ -3851,7 +3823,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -371.3, y: -176.1}
+  m_AnchoredPosition: {x: -371.3, y: -143.5}
   m_SizeDelta: {x: 40.3045, y: 67.7389}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2058038435
@@ -3977,7 +3949,6 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -4012,7 +3983,6 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3731434706331686595, guid: bc6f6ae3117531c4f85205669cd50602, type: 3}
@@ -4140,7 +4110,6 @@ PrefabInstance:
       value: golem enemy placeholder model
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: bc6f6ae3117531c4f85205669cd50602, type: 3}
 --- !u!114 &5530103179271204254 stripped
 MonoBehaviour:
@@ -4174,7 +4143,6 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 252325842723101450, guid: 974129673b1c09e4c9abd85e794434b2, type: 3}
@@ -4286,5 +4254,4 @@ PrefabInstance:
       value: player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 974129673b1c09e4c9abd85e794434b2, type: 3}

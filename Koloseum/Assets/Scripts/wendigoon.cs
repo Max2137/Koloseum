@@ -173,6 +173,7 @@ public class wendigoon : MonoBehaviour, IMonster
         {
             isStunned = true;
             chargingOngoing = false;
+            Debug.Log("chargestop");
             Invoke("stunningStop", stunningDuration);
         }
         else
@@ -190,6 +191,9 @@ public class wendigoon : MonoBehaviour, IMonster
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         GetComponent<Rigidbody>().isKinematic = false;
+
+            Debug.Log("StunningStop");
+
 
         if (distanceToPlayer < dashDistance)
         {
@@ -230,7 +234,9 @@ public class wendigoon : MonoBehaviour, IMonster
         }
     }
 
-    public void Stun() {
+    public void Stun() 
+    {
+            Debug.Log("Stun");
         isStunned = true;
         Invoke("stunningStop", stunningDuration + 8f);
     }
@@ -241,7 +247,7 @@ public class wendigoon : MonoBehaviour, IMonster
         {
             HP -= DealHP;
 
-
+            Debug.Log("QuickAttected");
             displayText.color = new Color(displayText.color.r, displayText.color.g, displayText.color.b, 1f);
             displayText.text = "It got HIT!";
             isFading = true;
@@ -251,6 +257,7 @@ public class wendigoon : MonoBehaviour, IMonster
 
     public void DashAttacked()
     {
+            Debug.Log("DashAttected");
         HP -= 50;
         isStunned = true;
         chargingOngoing = false;
