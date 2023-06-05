@@ -185,31 +185,31 @@ public class PlayerAttack : MonoBehaviour
         }
 
         
-        if (other.CompareTag("Wendigoon") || other.CompareTag("Golem")) {
-            if (playerMovement.isDashing == true)
-            {
-                if (isColliding == true)
-                {
+        //if (other.CompareTag("Wendigoon") || other.CompareTag("Golem")) {
+          //  if (playerMovement.isDashing == true)
+            //{
+              //  if (isColliding == true)
+                //{
                     
-                    other.GetComponent<IMonster>().Stun();
-                    if (other.CompareTag("Golem"))
-                        other.GetComponent<IMonster>().QickAttacked(10);
-                    else 
-                        other.GetComponent<IMonster>().QickAttacked(80);
-                    Debug.Log("Atakuje");
+                  //  other.GetComponent<IMonster>().Stun();
+                    //if (other.CompareTag("Golem"))
+                      //  other.GetComponent<IMonster>().QickAttacked(10);
+                    //else 
+                      //  other.GetComponent<IMonster>().QickAttacked(80);
+                    //Debug.Log("Atakuje");
 
-                    effect1 = efekt.effect;
-                    effect1 += 1;
-                    efekt.effect = effect1;
+                    //effect1 = efekt.effect;
+                    //effect1 += 1;
+                    //efekt.effect = effect1;
 
                     //efekt.DecreaseSpeedReset();
-                }
-            }
-            else
-            {
+              //  }
+            //}
+            //else
+            //{
                 didHit = true;
-            }
-        }
+            //}
+        //}
     }
     private void OnTriggerExit(Collider other)
     {

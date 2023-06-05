@@ -8,6 +8,9 @@ public class RestartGame : MonoBehaviour
         // Check if the Escape key is pressed
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            // Set the time scale to 1
+            Time.timeScale = 1f;
+
             // Restart the game by loading Scene 1
             SceneManager.LoadScene(0);
         }
