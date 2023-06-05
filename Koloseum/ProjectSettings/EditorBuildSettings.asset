@@ -12,9 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 80c267807271abc469e0c3d82d2ad39f
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/wendigo.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/golem.unity
     guid: 692c232a6dc6c264bb0758636efde6d4
+  - enabled: 1
+    path: Assets/Scenes/wendigo 1.unity
+    guid: 94d50f356bda98b46b499f320d7749fc
   m_configObjects: {}
