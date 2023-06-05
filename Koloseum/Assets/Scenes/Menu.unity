@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 95585819}
   - component: {fileID: 95585818}
   - component: {fileID: 95585817}
+  - component: {fileID: 95585822}
   - component: {fileID: 95585821}
   m_Layer: 5
   m_Name: Canvas
@@ -312,6 +313,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8aac23994b1125244af102f3fad443cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &95585822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95585816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d8d75c99dd1914986aa9fc6df777d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &247588271
@@ -634,7 +647,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 641976056}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 95585822}
+        m_TargetAssemblyTypeName: PlayWendigoScene, Assembly-CSharp
+        m_MethodName: OnStartButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &641976056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -833,6 +858,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 790588839}
   m_CullTransparentMesh: 1
+--- !u!1001 &995790301
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2284392440247999839, guid: 7721a416ea6fa2743870485470fb3ea9, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2284392440247999839, guid: 7721a416ea6fa2743870485470fb3ea9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 524.75653
+      objectReference: {fileID: 0}
+    - target: {fileID: 2284392440247999839, guid: 7721a416ea6fa2743870485470fb3ea9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 495.683
+      objectReference: {fileID: 0}
+    - target: {fileID: 2284392440247999839, guid: 7721a416ea6fa2743870485470fb3ea9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 665.7198
+      objectReference: {fileID: 0}
+    - target: {fileID: 2284392440247999839, guid: 7721a416ea6fa2743870485470fb3ea9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2284392440247999839, guid: 7721a416ea6fa2743870485470fb3ea9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2284392440247999839, guid: 7721a416ea6fa2743870485470fb3ea9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2284392440247999839, guid: 7721a416ea6fa2743870485470fb3ea9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2284392440247999839, guid: 7721a416ea6fa2743870485470fb3ea9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2284392440247999839, guid: 7721a416ea6fa2743870485470fb3ea9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2284392440247999839, guid: 7721a416ea6fa2743870485470fb3ea9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2429021532041662645, guid: 7721a416ea6fa2743870485470fb3ea9, type: 3}
+      propertyPath: m_Name
+      value: Menairu
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7721a416ea6fa2743870485470fb3ea9, type: 3}
 --- !u!1 &1177771636
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,6 +928,7 @@ GameObject:
   - component: {fileID: 1177771639}
   - component: {fileID: 1177771638}
   - component: {fileID: 1177771637}
+  - component: {fileID: 1177771640}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -917,6 +1002,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1177771640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177771636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &1672446489
 GameObject:
   m_ObjectHideFlags: 0

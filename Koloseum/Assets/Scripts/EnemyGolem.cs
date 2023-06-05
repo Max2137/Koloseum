@@ -93,7 +93,7 @@ public class EnemyGolem : MonoBehaviour, IMonster
 
     public void Stun() {
         isStunned = true;
-        Invoke("stunningStop", stunningDuration + 10f);
+        Invoke("stunningStop", stunningDuration + 1f);
     }
 
     void stunningStop() {

@@ -199,7 +199,7 @@ public class PlayerAttack : MonoBehaviour
                     Debug.Log("Atakuje");
 
                     effect1 = efekt.effect;
-                    effect1 += 5;
+                    effect1 += 1;
                     efekt.effect = effect1;
 
                     //efekt.DecreaseSpeedReset();
